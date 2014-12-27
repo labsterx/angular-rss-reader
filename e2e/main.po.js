@@ -7,6 +7,7 @@
 
 var MainPage = function() {
   this.inputBox = element(by.id('rss-url'));
+  this.rssContents = element(by.id('rss-contents'));
 };
 
 module.exports = new MainPage();

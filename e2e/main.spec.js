@@ -9,7 +9,11 @@ describe('The main view', function () {
 	});
 
 	it('should include an input area', function() {
-		expect(page.inputBox.isPresent()).to.eventually.equal(true);
+		expect(page.inputBox.isDisplayed()).to.eventually.equal(true);
+	});
+
+	it('should not show the rss contents section by default', function() {
+		expect(page.rssContents.isDisplayed()).to.eventually.equal(false);
 	});
 
 	// it('list more than 5 awesome things', function () {
