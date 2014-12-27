@@ -2,22 +2,30 @@
 
 	<div ng-include="'components/navbar/navbar.html'"></div>
 
+	<form ng-submit="fetchRSS()">
 	<div class="row">
 		<div class="col-sm-12 text-center">
 			<h2>Angular RSS Reader</h2>
 			<div class="input-group">
-				<input type="text" class="form-control" id="rss-url" placeholder="Enter RSS URL">
-				<span class="input-group-btn">
-					<button class="btn btn-primary" type="button">Go!</button>
-				</span>
+				
+					<input type="text" class="form-control" id="rss-url" ng-model="input.rssURL" placeholder="Enter RSS URL">
+					<span class="input-group-btn">
+						<button class="btn btn-primary" id="rss-submit" type="submit">Go!</button>
+					</span>
+
 			</div>
 		</div>
 	</div>
+	</form>
 
-	<div class="row" id="rss-contents" ng-show="rssEntries.length">
+	<div class="row" id="rss-contents" ng-show="feed">
 		<!-- Begin feed contents -->
 		<div class="col-sm-9">
-		fdsafa
+			<h2>{{feed.title}}</h2>
+			<div class="feed-entry" ng-repeat="entry in feed.entries">
+				<h3>{{entry.title}}</h3>
+				<div>{{entry.contentSnippet}}</div>
+			</div>
 		</div>
 		<!-- End feed contents -->
 		<!-- Begin sidebar -->

@@ -1,23 +1,29 @@
 'use strict';
 
-describe('The main view', function () {
+describe('The main view', function() {
 	var page;
 
-	beforeEach(function () {
+	beforeEach(function() {
 		browser.get('http://localhost:3000/#/');
 		page = require('./main.po');
 	});
 
-	it('should include an input area', function() {
+	it('The page should include an input area', function() {
 		expect(page.inputBox.isDisplayed()).to.eventually.equal(true);
 	});
 
-	it('should not show the rss contents section by default', function() {
+	it('The page should not show the rss contents section by default', function() {
 		expect(page.rssContents.isDisplayed()).to.eventually.equal(false);
 	});
 
-	// it('list more than 5 awesome things', function () {
-	//   expect(page.thumbnailEls.count()).toBeGreaterThan(5);
-	// });
+	it('Then I enter a RSS URL in the input field and click the "Go" button', function() {
+		page.inputBox.sendKeys('http://feeds.feedburner.com/TechCrunch/');
+		page.goBtn.click();
+	});
+
+	it('The RSS Contents Section should be visible', function() {
+		expect(page.rssContents.isDisplayed()).to.eventually.equal(true);
+	});
+
 
 });

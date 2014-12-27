@@ -8,6 +8,7 @@
 var MainPage = function() {
   this.inputBox = element(by.id('rss-url'));
   this.rssContents = element(by.id('rss-contents'));
+  this.goBtn = element(by.id('rss-submit'));
 };
 
 module.exports = new MainPage();

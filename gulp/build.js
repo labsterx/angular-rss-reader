@@ -58,7 +58,7 @@ gulp.task('injector:js', ['jshint', 'injector:css'], function () {
   return gulp.src('src/index.html')
     .pipe($.inject(gulp.src([
         'src/{app,components}/**/*.js',
-        '!src/{app,components}/**/*.spec.js',
+        '!src/{app,components}/**/*.test.js',
         '!src/{app,components}/**/*.mock.js'
       ], {read: false}), {
       ignorePath: 'src',
