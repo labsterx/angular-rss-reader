@@ -16,13 +16,10 @@ describe('The main view', function() {
 		expect(page.rssContents.isDisplayed()).to.eventually.equal(false);
 	});
 
-	it('Then I enter a RSS URL in the input field and click the "Go" button', function() {
+	it('I should see RSS entries showing up after entering a correct URL', function() {
 		page.inputBox.sendKeys('http://feeds.feedburner.com/TechCrunch/');
 		page.goBtn.click();
-	});
-
-	it('The RSS Contents Section should be visible', function() {
-		expect(page.rssContents.isDisplayed()).to.eventually.equal(true);
+		expect(page.entries.count()).to.eventually.be.above(1);
 	});
 
 

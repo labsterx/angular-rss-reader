@@ -1,21 +1,25 @@
-<nav class="navbar navbar-static-top navbar-inverse" ng-controller="NavbarCtrl">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="https://github.com/Swiip/generator-gulp-angular">
-        <span class="glyphicon glyphicon-home"></span>
-      </a>
-    </div>
+	<nav class="navbar navbar-fixed-top header">
+		<div class="col-md-12">
+			<div class="navbar-header">
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
-      <ul class="nav navbar-nav">
-        <li class="active"><a ng-href="#">Home</a></li>
-        <li><a ng-href="#">About</a></li>
-        <li><a ng-href="#">Contact</a></li>
-      </ul>
+				<a href="#" class="navbar-brand">Angular RSS Reader</a>
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse1">
+				<i class="glyphicon glyphicon-search"></i>
+				</button>
 
-      <ul class="nav navbar-nav navbar-right">
-        <li>Current date: {{ date | date:'yyyy-MM-dd' }}</li>
-      </ul>
-    </div>
-  </div>
-</nav>
+			</div>
+			<div class="collapse navbar-collapse" id="navbar-collapse1">
+<!-- 				<form class="navbar-form pull-left">
+						<div class="input-group" style="max-width:570px;">
+							<input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+							<div class="input-group-btn">
+								<button class="btn btn-default btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+							</div>
+						</div>
+				</form> -->
+				<ul class="nav navbar-nav navbar-right">
+					 <li><a href="#">About</a></li>
+				 </ul>
+			</div>
+		</div>
+	</nav>

@@ -5,9 +5,9 @@
 	<form ng-submit="fetchRSS()">
 	<div class="row">
 		<div class="col-sm-12 text-center">
-			<h2>Angular RSS Reader</h2>
+			<h3>Angular RSS Reader</h3>
 			<div class="input-group">
-				
+
 					<input type="text" class="form-control" id="rss-url" ng-model="input.rssURL" placeholder="Enter RSS URL">
 					<span class="input-group-btn">
 						<button class="btn btn-primary" id="rss-submit" type="submit">Go!</button>
@@ -20,25 +20,46 @@
 
 	<div class="row" id="rss-contents" ng-show="feed">
 		<!-- Begin feed contents -->
-		<div class="col-sm-9">
-			<h2>{{feed.title}}</h2>
-			<div class="feed-entry" ng-repeat="entry in feed.entries">
-				<h3>{{entry.title}}</h3>
-				<div>{{entry.contentSnippet}}</div>
+		<div class="col-sm-12">
+			<div class="well feed-summary">
+				<div class="feed-title" data-ng-bind-html="feed.title"></div>
+				<div class="feed-meta"><strong>Feed URL:</strong> <a href="{{feed.feedUrl}}" target="_blank">{{feed.feedUrl}}</a></div>
+				<div class="feed-meta" ng-show="feed.link"><strong>Link:</strong> <a href="{{feed.link}}" target="_blank">{{feed.link}}</a></div>
+				<div class="feed-meta" ng-show="feed.author"><strong>Author:</strong> {{feed.author}}</div>
+				<div class="feed-meta" ng-show="feed.description"><strong>Description:</strong><br />{{feed.description}}</div>
+			</div>
+			<div class="panel panel-default rss-entry" ng-repeat="entry in feed.entries">
+				<div class="panel-heading">
+					<div class="content-title"><a href="{{entry.link}}" target="_blank"><span data-ng-bind-html="entry.title"></span></a></div>
+					<div class="content-title-toggle-icon" ng-click="input.showFullContent[$index]=!input.showFullContent[$index]">
+						<span ng-show="input.showFullContent[$index]" class="glyphicon glyphicon-chevron-up big-text-icon"></span>
+						<span ng-show="!input.showFullContent[$index]" class="glyphicon glyphicon-chevron-down big-text-icon"></span>
+					</div>
+				</div>
+				<div class="panel-body">
+					<div class="entry-meta" ng-show="entry.author || entry.publishDate">
+						<span ng-show="entry.publishedDate"><span class="glyphicon glyphicon-calendar"></span> {{entry.publishedDate}} &nbsp;&nbsp;</span>
+						<span ng-show="entry.author"><span class="glyphicon glyphicon-user"></span> {{entry.author}}</span>
+					</div>
+					<div class="entry-meta" ng-show="entry.categories">
+						<span class="label label-info category-label" ng-repeat="category in entry.categories">{{category}}</span>
+					</div>
+					<div class="content-snippet" data-ng-bind-html="entry.contentSnippet" id="content-snippet-{{$index}}"  ng-hide="input.showFullContent[$index]"></div>
+					<div class="full-content" id="content-snippet-{{$index}}" ng-show="input.showFullContent[$index]">
+						<div data-ng-bind-html="entry.content"></div>
+						<div class="text-right">
+							<span class="glyphicon glyphicon-chevron-up big-text-icon" ng-click="input.showFullContent[$index]=false"></span>
+						</div>
+					</div>
 			</div>
 		</div>
 		<!-- End feed contents -->
-		<!-- Begin sidebar -->
-		<div class="col-sm-3">
-		fdasf
-		</div>		
-		<!-- end sidebar -->
 	</div>
 
-	<hr>
+<!-- 	<hr>
 
 	<div class="footer">
 		<p class='text-center'>Angular RSS Reader</p>
-	</div>
+	</div> -->
 
 </div>
