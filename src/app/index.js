@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('angularRssReader', ['ngAnimate', 'ngSanitize', 'ngRoute', 'ui.bootstrap'])
+angular.module('angularRssReader', ['ngSanitize', 'ngRoute'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
