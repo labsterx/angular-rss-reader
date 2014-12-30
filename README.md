@@ -3,6 +3,8 @@ angular-rss-reader
 
 This is a RSS reader web app implemented with AngularJS.
 
+Demo: http://labsterx.com/projects/angular-rss-reader/.
+
 This web app is developed using a test-driven development (TDD) approach. The repository includes both unit-tests and E2E tests. For unit testing, I used Karma, Mocha, Chai and Sinon etc. For end-to-end (E2E) tests, I used Protractor, Mocha, Chai and Sinon etc.
 
 I used Gulp as the build system for this project.
