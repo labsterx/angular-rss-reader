@@ -16,8 +16,8 @@ $ cd angular-rss-reader
 $ npm install
 ```
 
-Run The Site
------------
+Run the web app
+---------------
 
 ```sh
 $ gulp serve

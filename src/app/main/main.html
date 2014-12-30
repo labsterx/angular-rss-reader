@@ -18,9 +18,20 @@
 	</div>
 	</form>
 
+	<div class="row" id="error-section" ng-show="error">
+		<div class="col-sm-12">
+			<div class="alert alert-danger" role="alert">
+			  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+			  <span id="error-message">{{error}}</span>
+			</div>
+		</div>
+	</div>
+
 	<div class="row" id="rss-contents" ng-show="feed">
 		<!-- Begin feed contents -->
 		<div class="col-sm-12">
+
+			<!-- begin feed summary -->
 			<div class="well feed-summary">
 				<div class="feed-title" data-ng-bind-html="feed.title"></div>
 				<div class="feed-meta"><strong>Feed URL:</strong> <a href="{{feed.feedUrl}}" target="_blank">{{feed.feedUrl}}</a></div>
@@ -28,6 +39,9 @@
 				<div class="feed-meta" ng-show="feed.author"><strong>Author:</strong> {{feed.author}}</div>
 				<div class="feed-meta" ng-show="feed.description"><strong>Description:</strong><br />{{feed.description}}</div>
 			</div>
+			<!-- end feed summary -->
+
+			<!-- begin feed entries -->
 			<div class="panel panel-default rss-entry" ng-repeat="entry in feed.entries">
 				<div class="panel-heading">
 					<div class="content-title"><a href="{{entry.link}}" target="_blank"><span data-ng-bind-html="entry.title"></span></a></div>
@@ -52,6 +66,8 @@
 						</div>
 					</div>
 			</div>
+			<!-- end feed entries -->
+
 		</div>
 		<!-- End feed contents -->
 	</div>

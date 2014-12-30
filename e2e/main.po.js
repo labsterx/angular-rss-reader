@@ -9,7 +9,12 @@ var MainPage = function() {
   this.inputBox = element(by.id('rss-url'));
   this.rssContents = element(by.id('rss-contents'));
   this.goBtn = element(by.id('rss-submit'));
+  this.feedSummary = element(by.className('feed-summary'));
+  this.feedTitle = element(by.binding('feed.title'));
+  this.feedUrl = element(by.binding('feed.feedUrl'));
   this.entries = element.all(by.repeater('entry in feed.entries'));
+  this.errSection = element(by.id('error-section'));
+  this.errMsg = element(by.id('err-message'));
 };
 
 module.exports = new MainPage();

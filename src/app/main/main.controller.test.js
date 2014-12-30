@@ -1,10 +1,11 @@
 'use strict';
 
 describe('MainCtrl', function(){
-	
+
 	var scope;
 	var createCtrl;
 	var successData;
+	var failureData;
 
 	beforeEach(module('angularRssReader'));
 
@@ -42,6 +43,11 @@ describe('MainCtrl', function(){
 				}
 			}
 		};
+		failureData = {
+			responseData: null,
+			responseDetails: "Feed could not be loaded.",
+			responseStatus: 400
+		};
 	}));
 
 	describe('.constructor', function() {
@@ -58,21 +64,51 @@ describe('MainCtrl', function(){
 			createCtrl();
 		});
 
-		it('initializes rssEntries list to be empty', function() {
-			expect(scope.rssEntries.length).to.be.equal(0);
-		});		
+		it('feed should be null', function() {
+			expect(scope.feed).to.be.null;
+		});
+
+		it('error should be null', function() {
+			expect(scope.error).to.be.null;
+		});
+
+	})
+
+	describe('#cleanUp', function() {
+
+		beforeEach(function(){
+			createCtrl();
+		});
+
+		it('cleans up feed', function() {
+			scope.feed = { 'foo': 'bar' };
+			scope.cleanUp();
+			expect(scope.feed).to.be.null;
+		});
+
+		it('cleans up error', function() {
+			scope.error = { 'foo': 'bar' };
+			scope.cleanUp();
+			expect(scope.error).to.be.null;
+		});
+
+		it('cleans up showFullContent', function() {
+			scope.showFullContent = { 'foo': 'bar' };
+			scope.cleanUp();
+			expect(scope.input.showFullContent).to.be.deep.equal({});
+		});
 
 	})
 
 	describe('#fetchRSS', function() {
 
-		describe('success', function() {
+		describe('Success', function() {
 
 			beforeEach(inject(function($httpBackend) {
-				var googleAPI = 'http://ajax.googleapis.com/ajax/services/feed/load?callback=JSON_CALLBACK&num=50&q=%3Cinput+RSS+URL%3E&v=1.0';
+				var googleAPI = 'http://ajax.googleapis.com/ajax/services/feed/load?callback=JSON_CALLBACK&num=50&q=http:%2F%2Fsuccess-test.com%2Ffeed%2F&v=1.0';
 				$httpBackend.whenJSONP(googleAPI).respond(successData);
 				createCtrl();
-				scope.input.rssURL = '<input RSS URL>';
+				scope.input.rssURL = 'http://success-test.com/feed/';
 			}));
 
 			it('populate the feed with correct data', inject(function($httpBackend) {
@@ -82,6 +118,36 @@ describe('MainCtrl', function(){
 			}));
 
 		});
+
+		describe('Error: invalid input', function() {
+
+			beforeEach(inject(function($httpBackend) {
+				createCtrl();
+			}));
+
+			it('shows error if the input is empty', inject(function($httpBackend) {
+				scope.input.rssURL = '';
+				scope.fetchRSS();
+				expect(scope.error).not.to.be.null;
+			}));
+
+			it('shows error if the input is not a valid URL', inject(function($httpBackend) {
+				scope.input.rssURL = 'blah';
+				scope.fetchRSS();
+				expect(scope.error).not.to.be.null;
+			}));
+
+			it('shows error if the input URL does not contain valid RSS feed', inject(function($httpBackend) {
+				var googleAPI = 'http://ajax.googleapis.com/ajax/services/feed/load?callback=JSON_CALLBACK&num=50&q=http:%2F%2Ffailure-test.com%2Ffeed%2F&v=1.0';
+				$httpBackend.whenJSONP(googleAPI).respond(failureData);
+				scope.input.rssURL = 'http://failure-test.com/feed/';
+				scope.fetchRSS();
+				$httpBackend.flush();
+				expect(scope.error).to.equal(failureData.responseDetails);
+			}));
+
+		});
+
 
 	});
 
