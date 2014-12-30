@@ -45,7 +45,7 @@ describe('MainCtrl', function(){
 		};
 		failureData = {
 			responseData: null,
-			responseDetails: "Feed could not be loaded.",
+			responseDetails: 'Feed could not be loaded.',
 			responseStatus: 400
 		};
 	}));
@@ -72,7 +72,7 @@ describe('MainCtrl', function(){
 			expect(scope.error).to.be.null;
 		});
 
-	})
+	});
 
 	describe('#cleanUp', function() {
 
@@ -98,7 +98,7 @@ describe('MainCtrl', function(){
 			expect(scope.input.showFullContent).to.be.deep.equal({});
 		});
 
-	})
+	});
 
 	describe('#fetchRSS', function() {
 
@@ -121,21 +121,21 @@ describe('MainCtrl', function(){
 
 		describe('Error: invalid input', function() {
 
-			beforeEach(inject(function($httpBackend) {
+			beforeEach(function() {
 				createCtrl();
-			}));
+			});
 
-			it('shows error if the input is empty', inject(function($httpBackend) {
+			it('shows error if the input is empty', function() {
 				scope.input.rssURL = '';
 				scope.fetchRSS();
 				expect(scope.error).not.to.be.null;
-			}));
+			});
 
-			it('shows error if the input is not a valid URL', inject(function($httpBackend) {
+			it('shows error if the input is not a valid URL', function() {
 				scope.input.rssURL = 'blah';
 				scope.fetchRSS();
 				expect(scope.error).not.to.be.null;
-			}));
+			});
 
 			it('shows error if the input URL does not contain valid RSS feed', inject(function($httpBackend) {
 				var googleAPI = 'http://ajax.googleapis.com/ajax/services/feed/load?callback=JSON_CALLBACK&num=50&q=http:%2F%2Ffailure-test.com%2Ffeed%2F&v=1.0';

@@ -22,7 +22,7 @@ gulp.task('injector:css:preprocessor', function () {
     .pipe($.inject(gulp.src([
         'src/{app,components}/**/*.scss',
         '!src/app/index.scss',
-        '!src/app/vendor.scss' 
+        '!src/app/vendor.scss'
       ], {read: false}), {
       transform: function(filePath) {
         filePath = filePath.replace('src/app/', '');
@@ -99,7 +99,7 @@ gulp.task('html', ['wiredep', 'injector:css', 'injector:js', 'partials'], functi
     .pipe($.uglify({preserveComments: $.uglifySaveLicense}))
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
-    .pipe($.replace('bower_components/bootstrap-sass-official/assets/fonts/bootstrap','fonts'))
+    // .pipe($.replace('bower_components/bootstrap-sass-official/assets/fonts/bootstrap','fonts'))
     .pipe($.csso())
     .pipe(cssFilter.restore())
     .pipe(assets.restore())
